@@ -18,9 +18,10 @@ class CTarget():
     def timeit(self, func):
         """ Timeit """
         time_start = datetime.now()
-        func()
-        
+        obj = func()
         delta = datetime.now() - time_start
+
+        del obj
         total = delta.seconds*1000000 + delta.microseconds
         return total
 

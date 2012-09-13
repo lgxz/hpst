@@ -25,11 +25,7 @@ class CResults(dict):
             stats[name] = stat
 
         if self._options.verbose:
-            try:
-                content = str(result['time'])
-            except:
-                content = result['except']
-            print '%s: %s -> %s' % (name, sample['filename'], content)
+            print '%s: %s -> %u' % (name, sample['filename'], result['time'])
 
         if 'time' in result:
             stat['ok'] += 1
@@ -37,6 +33,7 @@ class CResults(dict):
             stat['size'] += len(sample['content'])
         else:
             stat['err'] += 1
+            print '%s: %s -> %s' % (name, sample['filename'], result['except'])
 
 
     def show(self):
