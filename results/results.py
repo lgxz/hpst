@@ -12,6 +12,7 @@ class CResults(dict):
         """ init """
         self._options = options
         self._stats = {}
+        self._redis = options.redis
 
 
     def add(self, name, result, sample):
@@ -34,6 +35,9 @@ class CResults(dict):
         else:
             stat['err'] += 1
             print '%s: %s -> %s' % (name, sample['filename'], result['except'])
+
+        if self._redis:
+            self._redis.hmset(name, stat)
 
 
     def show(self):

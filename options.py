@@ -9,4 +9,7 @@ class COptions():
     def __init__(self):
         """ init """
         self.verbose = 1
+        self.redis = None
+        self.skip = 0
+
 

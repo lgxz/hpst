@@ -33,6 +33,9 @@ class CSamplesHTML(CSamples):
         self.html_dir = os.path.join(self.mydir, 'html')
         self.html_files = os.listdir(self.html_dir)
 
+        if options.skip > 0:
+            self.html_files = self.html_files[options.skip:]
+
 
     def __iter__(self):
         """Iter """
@@ -42,7 +45,7 @@ class CSamplesHTML(CSamples):
             try:
                 html = open(filepath, 'r').read()
             except Exception, e:
-                print >>sys.stderr, "Failed to read from file: %s, error: %s" % (filename, str(e))
+                print >> sys.stderr, "Failed to read from file: %s, error: %s" % (filename, str(e))
                 continue
 
             try:
@@ -59,5 +62,4 @@ if __name__ == '__main__':
 
     for sample in samples:
         print sample
-        pass
 

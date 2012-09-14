@@ -5,6 +5,8 @@
 
 import signal
 
+import redis
+
 import samples
 import results
 import targets
@@ -21,16 +23,32 @@ def on_sigint(signo, frame):
     m_stop = True
 
 
-def init_options():
+def init_options(opts, args):
     """ Init options """
     options = COptions()
+
+    options.redis = redis.Redis()
+    options.skip = opts.skip
 
     return options
 
 
+def parse_cmdline():
+    """ cmd parse """
+    from optparse import OptionParser
+
+    parser = OptionParser(usage="usage: %prog [options]")
+
+    parser.add_option('--skip', type=int, default=0, help='Skip first N samples')
+
+    opts, args = parser.parse_args()
+    return opts, args
+
+
 def main():
     """ Program entry """
-    options = init_options()
+    opts, args = parse_cmdline()
+    options = init_options(opts, args)
 
     _samples = samples.CSamplesHTML(options)
     _results = results.CResultsHTML(options)
