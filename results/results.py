@@ -24,10 +24,10 @@ class CResults(dict):
             stat = {'ok': 0, 'err': 0, 'time': 0, 'size': 0}
             stats[name] = stat
 
-        if self._options.verbose:
-            print '%s: %s -> %u' % (name, sample['filename'], result['time'])
-
         if 'time' in result:
+            if self._options.verbose:
+                print '%s: %s -> %u' % (name, sample['filename'], result['time'])
+
             stat['ok'] += 1
             stat['time'] += result['time']
             stat['size'] += len(sample['content'])

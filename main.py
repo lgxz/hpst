@@ -40,6 +40,7 @@ def main():
 
     for _sample in _samples:
         _targets.test(_sample, _results)
+        del _sample
         if m_stop:
             break
 

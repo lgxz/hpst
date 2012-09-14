@@ -8,5 +8,5 @@ class COptions():
 
     def __init__(self):
         """ init """
-        self.verbose = 0
+        self.verbose = 1
 
